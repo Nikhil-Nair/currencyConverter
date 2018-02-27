@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block converter %}
+  <form class="text-center" action="/convert" method="post">{% csrf_token %}
+     <div class="form-group">
+       <label>Convert From:</label>
+       <select class="form-control" id="sel1" name='fromCurrency'>
+           {% for key in currency %}
+              <option>{{ key.name }}</option>
+           {% endfor %}
+       </select>
+     </div>
+     <div class="form-group">
+       <label>Value:</label>
+         <input type="number" step="0.01" name="value" required></input>
+     </div>
+     <div class="form-group">
+       <label for="pwd">Convert To:</label>
+       <select class="form-control" id="sel1" name="toCurrency">
+           {% for key in currency %}
+              <option>{{ key.name }}</option>
+           {% endfor %}
+       </select>
+     </div>
+     <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+  <h2 class="text-center">{{outputString}}</h2>
+{% endblock converter %}
+
+
+{% block history %}
+
+  <ul class="list-group text-center">
+    <li class="list-group-item"><h3>Conversion History</h3></li>
+    {% for value in history %}
+      <li class="list-group-item">{{ value.history }}</li>
+    {% endfor %}
+  </ul>
+
+{% endblock history %}
+
+
+{% block jumbotron %}
+  <div class="container text-center">
+    <div class="jumbotron">
+      <h2>A Simple currency converter!</h2>
+      <a href="{% url 'login' %}" class="btn btn-lg btn-primary">Login</a>
+      <a href="{% url 'signup' %}" class="btn btn-lg btn-success">Signup</a>
+    </div>
+  </div>
+{% endblock jumbotron %}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <head>
+      <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <title></title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/home">CurrencyConverter</a>
+        </div>
+        {% if user.is_authenticated %}
+          <p class="navbar-text">Hi {{ user.username }}!</p>
+          <a href="{% url 'logout' %}" class="btn btn-lg btn-warning">Logout</a>
+        {% else %}
+          <p class="navbar-text">You are not logged in.</p>
+        {% endif %}
+      </div>
+  </nav>
+  {%if user.is_authenticated %}
+  <div class="row text-align-center">
+    <div class="col-sm-6">
+      {% block converter %}
+      {% endblock converter %}
+    </div>
+    <div class="col-sm-6">
+      {% block history %}
+      {% endblock history %}
+    </div>
+  </div>
+  {% else %}
+    {% block jumbotron %}
+    {% endblock jumbotron %}
+  {% endif %}
+
+</body>
+
+</html>
